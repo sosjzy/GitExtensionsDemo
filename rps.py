@@ -107,25 +107,18 @@ class PS(object):
         # self.N = ???
         self.L = self.L.T
         self.M = self.M.T
-        print(self.L.shape)
-        print(self.M.shape)
-
         self.N = np.linalg.lstsq(self.L,self.M)[0]
-        print(self.N.shape)
 
         # Step 2: We need to normalize the normal vectors as the norm of the normal vectors should be 1
         # Hint: You can use function normalize from sklearn.preprocessing
 
         # self.N = ???
-        self.N = normalize(self.N,norm="l2")
         self.N = self.N.T
-        print(self.N)
+        self.N = normalize(self.N, axis=1,norm="l2")
 
         #############################################
-
         if self.background_ind is not None:
             for i in range(self.N.shape[1]):
-                # print(self.background_ind)
                 self.N[self.background_ind, i] = 0
 
 
